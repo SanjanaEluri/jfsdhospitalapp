@@ -1,6 +1,6 @@
 import React from 'react';
 import './viewdoctors.css'; // Import the CSS file
-import { useNavigate ,Link,Route,Routes} from 'react-router-dom'; 
+import { Link,Route,Routes} from 'react-router-dom'; 
 import DoctorNavBar from './DoctorNavBar';
 export default function ViewDoctors({ doctors }) {
   return (
