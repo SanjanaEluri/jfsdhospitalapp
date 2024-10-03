@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import DoctorManagement from './Admin/DoctorManagement';
+import ViewDoctors from './Admin/ViewDoctors';
 
+import DoctorNavBar from './Admin/DoctorNavBar';
+import AdminHomepage from './Admin/AdminHomePage';
 function App() {
+  const [doctors, setDoctors] = useState([]);
+
+  // Function to add a doctor
+  const addDoctor = (doctorData) => {
+    // Append the new doctor to the list
+    setDoctors((prevDoctors) => [...prevDoctors, doctorData]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // The Router should wrap all the routes, but there should only be one Router
+    <Router>
+      <Routes>
+        {/* Route to add a doctor */}
+        <Route path="/Adminnavbar" element={<DoctorNavBar/>} />
+        <Route path="/" element={<AdminHomepage/>} />
+        <Route path="/addDoctors" element={<DoctorManagement addDoctor={addDoctor} />} />
+
+        {/* Route to view the list of doctors */}
+        <Route path="/ViewDoctors" element={<ViewDoctors doctors={doctors} />} />
+
+        {/* Default route */}
+        <Route path="/" element={<DoctorManagement addDoctor={addDoctor} />} />
+      </Routes>
+    </Router>
   );
 }
 
